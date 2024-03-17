@@ -7,4 +7,4 @@ Este repositorio está diseñado para facilitar un entorno de trabajo más orden
 Para aprender cómo utilizar Git con MATLAB, puedes consultar este [video tutorial](https://www.youtube.com/watch?v=O7A27uMduo0).
 
 ## Creación de un Personal Access Token
-Para poder utilizar los comandos de GIT, debes se debe crear un [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) (classic).
+Para poder utilizar los comandos de GIT, se debe crear un [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) (classic).
