@@ -50,29 +50,29 @@ plot(t,eventos_2,'LineWidth',2)
 title('Nro. de eventos a lo largo del tiempo');
 xlabel('t (seg)')
 grid on
-%% Datos 3
-out_3 = xlsread('um_0.04_50.xlsm','B1:B710');
-in_3 = xlsread('um_0.04_50.xlsm','E1:E710');
-activacion_3 = xlsread('um_0.04_50.xlsm','G1:G710');
-eventos_3 = xlsread('um_0.04_50.xlsm','I1:I710');
-
-t=1:length(out_3);
-subplot(3,1,1)
-plot(t,out_3,'blue','LineWidth',2)
-title('Periodico');
-xlabel('t (seg)');
-ylabel('H (cm)');
-grid on
-hold on
-plot(t,in_3,'--r','LineWidth',2);
-legend('y(t)','r(t)')
-subplot(3,1,2)
-plot(t,activacion_3,'LineWidth',2)
-title('Activacion de eventos')
-xlabel('t (seg)')
-grid on
-subplot(3,1,3)
-plot(t,eventos_3,'LineWidth',2)
-title('Nro. de eventos a lo largo del tiempo');
-xlabel('t (seg)')
-grid on
+% %% Datos 3
+% out_3 = xlsread('um_0.04_50.xlsm','B1:B710');
+% in_3 = xlsread('um_0.04_50.xlsm','E1:E710');
+% activacion_3 = xlsread('um_0.04_50.xlsm','G1:G710');
+% eventos_3 = xlsread('um_0.04_50.xlsm','I1:I710');
+% 
+% t=1:length(out_3);
+% subplot(3,1,1)
+% plot(t,out_3,'blue','LineWidth',2)
+% title('Periodico');
+% xlabel('t (seg)');
+% ylabel('H (cm)');
+% grid on
+% hold on
+% plot(t,in_3,'--r','LineWidth',2);
+% legend('y(t)','r(t)')
+% subplot(3,1,2)
+% plot(t,activacion_3,'LineWidth',2)
+% title('Activacion de eventos')
+% xlabel('t (seg)')
+% grid on
+% subplot(3,1,3)
+% plot(t,eventos_3,'LineWidth',2)
+% title('Nro. de eventos a lo largo del tiempo');
+% xlabel('t (seg)')
+% grid on
