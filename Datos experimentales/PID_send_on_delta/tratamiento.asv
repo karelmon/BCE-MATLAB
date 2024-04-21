@@ -215,7 +215,26 @@ hold off
 legend('periodico ','elim=0.1  hmax=50 ','elim=0.2  hmax=50 ','elim=0.3  hmax=50 ','elim=0.4  hmax=50 '...
     ,'elim=0.5  hmax=50 ','elim=0.6  hmax=50 ','elim=1.2  hmax=50 ','elim=2.4  hmax=50 ')
 
-subplot(2,1,2)
+%%
+t=1:length(out_1);
+plot(t,out_2,'--b','LineWidth',3)
+title('P Kp=5');
+xlabel('t (seg)');
+ylabel('H (cm)');
+grid on
+hold on
+plot(t,out_5,'--','LineWidth',0.8);
+plot(t,out_9,'--','LineWidth',0.8);
+plot(t,out_12,'--','LineWidth',0.8);
+plot(t,out_15,'--','LineWidth',0.8);
+plot(t,out_19,'--','LineWidth',0.8);
+plot(t,out_21,'--','LineWidth',0.8);
+plot(t,out_23,'r','LineWidth',1.2);
+hold off
+legend('periodico ','elim=0.1  hmax=50 ','elim=0.2  hmax=50 ','elim=0.3  hmax=50 ','elim=0.4  hmax=50 '...
+    ,'elim=0.6  hmax=50 ','elim=1.2  hmax=50 ','elim=2.4  hmax=50 ')
+
+%%
 t=1:length(out_1);
 plot(t,eventos_1,'--b','LineWidth',3)
 title('PI Kp=5 Ki=0.015');
@@ -235,26 +254,6 @@ hold off
 legend('periodico ','elim=0.1  hmax=50 ','elim=0.2  hmax=50 ','elim=0.3  hmax=50 ','elim=0.4  hmax=50 '...
     ,'elim=0.5  hmax=50 ','elim=0.6  hmax=50 ','elim=1.2  hmax=50 ','elim=2.4  hmax=50 ')
 %%
-t=1:length(out_1);
-subplot(2,1,1)
-plot(t,out_2,'--b','LineWidth',3)
-title('P Kp=5');
-xlabel('t (seg)');
-ylabel('H (cm)');
-grid on
-hold on
-plot(t,out_5,'--','LineWidth',0.8);
-plot(t,out_9,'--','LineWidth',0.8);
-plot(t,out_12,'--','LineWidth',0.8);
-plot(t,out_15,'--','LineWidth',0.8);
-plot(t,out_19,'--','LineWidth',0.8);
-plot(t,out_21,'--','LineWidth',0.8);
-plot(t,out_23,'r','LineWidth',1.2);
-hold off
-legend('periodico ','elim=0.1  hmax=50 ','elim=0.2  hmax=50 ','elim=0.3  hmax=50 ','elim=0.4  hmax=50 '...
-    ,'elim=0.6  hmax=50 ','elim=1.2  hmax=50 ','elim=2.4  hmax=50 ')
-
-subplot(2,1,2)
 t=1:length(out_1);
 plot(t,eventos_2-200,'--b','LineWidth',3)
 title('P Kp=5');
