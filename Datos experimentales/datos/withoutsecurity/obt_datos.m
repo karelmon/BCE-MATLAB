@@ -47,7 +47,7 @@ plot(datos048.out_sod);
 plot(datos056.out_sod);
 plot(datos064.out_sod);
 hold off
-title('Time Response');
+title('Without safety condition Kp=30 Ki=0.015');
 legend('elim=0.08 & hmax=50', 'elim=0.16 & hmax=50' ...
     ,'elim=0.32 & hmax=50','elim=0.48 & hmax=50','elim=0.56 & hmax=50' ...
     ,'elim=0.64 & hmax=50');
@@ -55,16 +55,16 @@ xlabel('time(seg)');
 ylabel('h (cm)');
 %%respuesta de eventos
 subplot(212)
-plot(datos008.sum_evento);
+plot(datos008.sum_evento, 'LineStyle','--', 'LineWidth',1.5);
 grid;
 hold on
-plot(datos016.sum_evento);
-plot(datos032.sum_evento);
-plot(datos048.sum_evento);
-plot(datos056.sum_evento);
-plot(datos064.sum_evento);
+plot(datos016.sum_evento, 'LineStyle','--', 'LineWidth',1.5);
+plot(datos032.sum_evento, 'LineStyle','--', 'LineWidth',1.5);
+plot(datos048.sum_evento, 'LineStyle','--', 'LineWidth',1.5);
+plot(datos056.sum_evento, 'LineStyle','--', 'LineWidth',1.5);
+plot(datos064.sum_evento, 'LineStyle','--', 'LineWidth',1.5);
 hold off
-title('No of Events in time');
+title('No of Events in time Kp=30 Ki=0.015');
 legend('elim=0.08 & hmax=50', 'elim=0.16 & hmax=50' ...
     ,'elim=0.32 & hmax=50','elim=0.48 & hmax=50','elim=0.56 & hmax=50' ...
     ,'elim=0.64 & hmax=50','Location','northwest');
@@ -75,6 +75,7 @@ figure(2)
 subplot(231)
 plot(datos008.num_eventos);
 title('Events Activation elim=0.08');
+%xlabel("No of events")
 subplot(232)
 plot(datos016.num_eventos);
 title('Events Activation elim=0.16');

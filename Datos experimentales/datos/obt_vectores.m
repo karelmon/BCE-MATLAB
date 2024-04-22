@@ -1,10 +1,10 @@
 clc; clear; 
-filename = 'um_0.56_50.xlsm';
+filename = 'um_008withoutsecurity50.xlsm';
 sheet = 1;
-xlRange = 'B1:B1143';
-ylRange = 'E1:E1143';
-nRange = 'G1:G1143';
-zlRange = 'I1:I1143';
+xlRange = 'B1:B865';
+ylRange = 'E1:E865';
+nRange = 'G1:G865';
+zlRange = 'I1:I865';
 out_sod = xlsread(filename,sheet,xlRange) ;
 in_sod = xlsread(filename,sheet,ylRange);
 num_eventos = xlsread(filename,sheet,nRange);
