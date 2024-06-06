@@ -3,7 +3,7 @@ in_p = xlsread('periodico_30_0015.xlsm','E1:E688');
 %%
 t=1:length(out_p);
 plot(t,out_p,'blue','LineWidth',2)
-title('Periodico');
+title('Periodic response');
 xlabel('t (seg)');
 ylabel('H (cm)');
 grid on

@@ -7,7 +7,7 @@ G=tf([0.5],[1 1 1])
 Ts=0.01;   %periodo de muestreo del controlador por eventos
 t=0:.001:5;
 
-[y,x,t,Kd,u,e,N,M,eventos]=Lyap_based(A,B,C,[-1+j -1-j],t,.5,Ts,[0;1],[0;0]);   
+[y,x,t,Kd,u,e,N,M,eventos]=Lyap_based(A,B,C,[-1+i -1-i],t,.5,Ts,[0;1],[0;0]);   
 
 figure(1);
 plot(t,y,'LineWidth',3) %salida
