@@ -1,8 +1,8 @@
-function [y,x,t,Kd,u,e,N,M,eventos,norma] = Lyap_based(A,B,C,poles,t,sigma,Ts,x0,xs0)
-% Lyap_based - Implementación de un controlador en tiempo DISCRETO gobernado por eventos, mediante metodos basados en funcioens de Lyapunov.
+function [y, x, t, Kd, u, e, N, M, eventos, norma] = Lyap_based(A, B, C, poles, t, sigma, Ts, x0, xs0, ref)
+% Lyap_based - Implementación de un controlador en tiempo DISCRETO gobernado por eventos, mediante métodos basados en funciones de Lyapunov.
 %
-%   [y, x, t, Kd, u, e, N, M, eventos] = Lyap_based(A, B, C, poles, t, sigma, Ts, x0, xs0)
-%   calcula la respuesta del sistema gobernado por eventos, a lazo cerrado.
+%   [y, x, t, Kd, u, e, N, M, eventos, norma] = Lyap_based(A, B, C, poles, t, sigma, Ts, x0, xs0, ref)
+%   calcula la respuesta del sistema gobernado por eventos, a lazo cerrado, con un seguidor de referencia.
 %
 %   Entradas:
 %       A - Matriz de estado de la planta continua.
@@ -14,6 +14,7 @@ function [y,x,t,Kd,u,e,N,M,eventos,norma] = Lyap_based(A,B,C,poles,t,sigma,Ts,x0
 %       Ts - Período de muestreo del controlador discreto.
 %       x0 - Condiciones iniciales de la planta continua.
 %       xs0 - Condiciones iniciales que el controlador por eventos asume.
+%       ref - Vector de referencia.
 %
 %   Salidas:
 %       y - Vector de salida del sistema a lazo cerrado.
@@ -21,16 +22,14 @@ function [y,x,t,Kd,u,e,N,M,eventos,norma] = Lyap_based(A,B,C,poles,t,sigma,Ts,x0
 %       t - Vector de tiempo.
 %       Kd - Matriz de ganancia del controlador discreto.
 %       u - Vector de la señal de control.
-%       e - Vector de error entre la salida y cero.
+%       e - Vector de error entre la salida y la referencia.
 %       N - Número de eventos en los que se activa el controlador por eventos.
-%       M - Número de eventos en los que se activa un controladro periodico regular.
+%       M - Número de eventos en los que se activa un controlador periódico regular.
 %       eventos - Vector que indica los eventos en los que se activa el controlador.
-%       norma - Es el vector que guarda los valores de la norma vectorial
-%       de la diferencia entre los estados medidos y los estados del ultimo
-%       evento.
+%       norma - Vector que guarda los valores de la norma vectorial de la diferencia entre los estados medidos y los estados del último evento.
 %
 %   Ejemplo de uso:
-%       [y, x, t, Kd, u, e, N, M, eventos] = Lyap_based(A, B, C, poles, t, sigma, Ts, x0, xs0);
+%       [y, x, t, Kd, u, e, N, M, eventos, norma] = Lyap_based(A, B, C, poles, t, sigma, Ts, x0, xs0, ref);
 %
 %   Notas:
 %       - Esta función asume que el sistema es continuo.
@@ -77,7 +76,7 @@ Kd = acker(D.A, D.B, pz);
 uc = 0;
 x = x0;
 y = C * x0;
-e = zeros(0, length(t) - 1);
+e = zeros(1, length(t) - 1);
 e_norma = e;
 sigma_norma = e;
 norma = sigma_norma;
@@ -89,7 +88,7 @@ xs = xs0;
 
 % Bucle principal de simulación
 for i = 1:length(t) - 1
-    e(i) = 0 - y(i);
+    e(i) = ref(i) - y(i);
     
     eventos(i) = 0;
     e_norma(i) = norm(x(:,i) - xs(:, k));
@@ -99,7 +98,7 @@ for i = 1:length(t) - 1
     % Controlador actúa cada Ts segundos
     if mod(t(i), Ts) == 0
         if e_norma(i) >= sigma_norma(i)
-            uc = -Kd * x(:,i);
+            uc = -Kd * x(:,i) + ref(i);  % Añade la referencia en la señal de control
             k = k + 1;
             xs(:, k) = x(:,i);
             eventos(i) = 1;
@@ -107,6 +106,12 @@ for i = 1:length(t) - 1
     end
     
     u(i) = uc;
+     if (u(i) >= 30.0)     
+        u(i) = 30.0;
+     end
+     if (u(i) <= 0.0)
+         u(i) = 0.0;
+     end
     x(:,i + 1) = D_sim.A * x(:,i) + D_sim.B * u(i);
     y(i + 1) = D_sim.C * x(:,i + 1);
 end
@@ -118,4 +123,3 @@ N = length(find(eventos == 1));
 M = length(t);
 
 end
-

@@ -1,28 +1,21 @@
 
-% G=tf([0.5],[1 1 1])
-% [A,B,C,D]=tf2ss(0.5,[1 1 1]); %Espacio de estados
-%G=tf([0.5],[1 1 1])
-%clc; clear all;
-%[A,B,C,D]=tf2ss(0.923,[265 1]); %Espacio de estados
 clc;clear;close all
-Tau = 333.03;
-J = 0.8068;
-num=[J];
+Tau = 265;
+J = 0.923;
+num=J;
 den=[Tau 1];
-G=tf(num,den)
+
 A = -1/Tau;
 B = J/Tau;
 C = 1;
 D = 0;
 %Perido de muestreo y vector de tiempos
-%Ts=0.01;   %periodo de muestreo del controlador por eventos
 Ts=5;
 %t=0:.001:20;
-t=0:Ts:4000;
+t=0:Ts:3000;
 ref = zeros(size(t));
-ref(t >= 50 ) = 25;
-%[y,x,t,Kd,u,e,N,M,eventos]=Lyap_based(A,B,C,[-1+i -1-i],t,.5,Ts,[0;1],[0;0], ref);   
-[y,x,t,Kd,u,e,N,M,eventos]=Lyap_based(A,B,C,-0.01,t,.2,Ts,0,0,ref);   
+ref(t >= 50 ) = 25;   
+[y,x,t,Kd,u,e,N,M,eventos]=Lyap_based(A,B,C,-0.00347,t,.2,Ts,1,0,ref);   
 figure(1);
 plot(t,y,'LineWidth',3) %salida
 grid on
