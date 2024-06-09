@@ -1,4 +1,4 @@
-function [y,x,t,Kd,u,e,N,M,eventos,norma] = state_approach_based(A,B,C,poles,t,umbral,incertidumbre_de_A,incertidumbre_de_B,Ts,x0,xs0)
+function [y,x,t,Kd,u,e,N,M,eventos,norma] = state_approach_based(A,B,C,poles,t,umbral,incertidumbre_de_A,incertidumbre_de_B,Ts,x0,xs0,ref)
 % state_approach_based - Implementación de un controlador gobernado por eventos, basado en el método de emulacion de estados para un sistema con incertidumbre.
 %
 %   [y, x, t, Kd, u, e, N, M, eventos] = state_approach_based(A, B, C, poles, t, umbral, incertidumbre_de_A, incertidumbre_de_B, Ts, x0, xs0)
@@ -91,7 +91,7 @@ y=C * x;
 A_tilde=(D.A)-D.B*Kd;
 k=1;
 for i=1:length(t)-1
-    e(i)=0-y(i);
+    e(i)=ref(i)-y(i);
     
     eventos(i)=0;
     norma(i)=norm(x(:,i)-xs(:,k));
@@ -104,7 +104,7 @@ for i=1:length(t)-1
             eventos(i)=1;
         end
         
-        uc=-Kd*xs(:,k);
+        uc=-Kd*xs(:,k) + ref(i);
         k=k+1;
     end
     
